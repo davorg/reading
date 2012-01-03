@@ -1,0 +1,14 @@
+<% IF error -%>
+<p class="error"><% error %>
+<% ELSE %>
+<p>You searched for: <b><% search %></b></p>
+<%   IF books.size %>
+<ul>
+<%     FOREACH book IN books -%>
+<li><img src="<% book.ImageUrlSmall %>"  align="left" /><b><% book.title %></b> (<% book.authors.list.0 %>)<% IF logged %> <a href="/add/<% book.ASIN %>">Add to list</a><% END %></li>
+<%     END %>
+</ul>
+<%   ELSE %>
+<p>Your search returned no results.</p>
+<%   END %>
+<% END %>

@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>
+  <title>Reading List : dave.org.uk</title>
+    
+  <meta name="description" content="This is the official web site of Dave Cross. It might not be the official web site for the Dave Cross that you are looking for, but it's definitely the official web site of A Dave Cross." />
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://davorg.myopenid.com/" />
+  <link rel="meta" type="application/rdf+xml" title="FOAF"
+        href="http://dave.org.uk/dc.foaf" />
+  <meta http-equiv="X-XRDS-Location"
+        content="http://davorg.myopenid.com/xrds" />
+  <meta name="ICBM" content="51.442, -0.1454" />
+  <meta name="DC.title" content="Reading List : dave.org.uk" />
+  <link rel="stylesheet" type="text/css" href="http://dave.org.uk/css/screen.css" />
+  <link rel="stylesheet" type="text/css" href="http://dave.org.uk/css/style.css" />
+  <style type="text/css">
+#footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 20px;
+}
+  </style>
+  <link rel="alternate" type="application/atom+xml" href="http://dave.org.uk/feeds/long.xml" title="Long Entries" />
+  <link rel="alternate" type="application/atom+xml" href="http://dave.org.uk/feeds/short.xml" title="Short Entries" />
+  <link rel="alternate" type="application/atom+xml" href="http://api.flickr.com/services/feeds/photos_public.gne?id=39021241@N00&amp;lang=en-us&amp;format=atom" title="Photos" />
+  <link rel="alternate" type="application/atom+xml" href="http://davorg.theplanetarium.org/atom.xml" title="Everything" />
+</head> 
+  <body>
+    <div id="photos"><iframe height="75px" width="110%" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="overflow: hidden" src="http://dave.org.uk/feeds/flickr.html"></iframe></div>
+  
+    <h1>Reading List</h1>
+    <div id="content">
+    <div id="long">
+     <% content %>
+    </div>
+    <div id="short">
+    <h2>&nbsp;</h2>
+<% IF logged %><a href="/logout">Log out</a><% ELSE %><a href="/login">Log in</a><% END %>
+<p><form method="post" action="/search"><p>Search Amazon:
+<input name="search" values="<% search %>" /> <input type="submit" value="Search" /></form></p>
+
+<script type="text/javascript"><!--
+amazon_ad_tag = "davblog-21"; amazon_ad_width = "160"; amazon_ad_height = "600";//--></script>
+<script type="text/javascript" src="http://www.assoc-amazon.co.uk/s/ads.js"></script>
+    </div>
+    </div>
+    <div id="nav">
+  <ul>
+    <li>Elsewhere:</li>
+    <li><a href="http://dave.org.uk/">home</a></li>
+    <li><a href="http://blog.dave.org.uk/">blog</a></li>
+    <li><a href="http://dave.org.uk/geekery/">geekery</a></li>
+    <li><a href="http://dave.org.uk/where/">where</a></li>
+    <li><a href="http://dave.org.uk/reviews/">book reviews</a></li>
+    <li><a href="http://mag-sol.com/">magnum solutions</a></li>
+    <li><a href="http://dave.org.uk/feeds/">feeds</a></li>
+  </ul>
+  </div> 
+    <div id="feeds">
+  <h2>Atom Feeds</h2>
+  <ul>
+    <li><a href="http://dave.org.uk/feeds/long.xml">Long Entries</a></li>
+    <li><a href="http://dave.org.uk/feeds/short.xml">Short Entries</a></li>
+    <li><a href="http://api.flickr.com/services/feeds/photos_public.gne?id=39021241@N00&amp;lang=en-us&amp;format=atom">Photos</a></li>
+    <li><a href="http://davorg.theplanetarium.org/atom.xml">Everything</a></li>
+  </ul>
+  </div>
+<div id="footer">Powered by <a href="http://perldancer.org/">Dancer</a> <% dancer_version %></div>
+    <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-56332-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+  </body>
+</html>
+
