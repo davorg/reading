@@ -27,13 +27,11 @@ engines:
     start_tag: '<%'
     end_tag:   '%>'
 
-plugins:
-  DBIC:
-    book:
-      schema_class: Book
-      dsn: dbi:mysql:database=books
-      user: books
-      pass: b00k5
+# plugins:
+#   DBIC:
+#     book:
+#       schema_class: Book
+#       dsn: dbi:mysql:database=books
 
 session: cookie
 session_cookie_key: somerandomnonsense

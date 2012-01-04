@@ -8,6 +8,17 @@ use DateTime;
 
 our $VERSION = '0.1';
 
+set plugins => {
+    DBIC => {
+        book => {
+            schema_class => 'Book',
+            dsn => 'dbi:mysql:database=books',
+            user => $ENV{BOOK_USER},
+            pass => $ENV{BOOK_PASS},
+        }
+    }
+};
+
 my @public_paths = qw[/ /login /search];
 my %public_path = map { $_ => 1 } @public_paths;
 
