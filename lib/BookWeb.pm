@@ -8,17 +8,6 @@ use DateTime;
 
 our $VERSION = '0.1';
 
-set plugins => {
-    DBIC => {
-        book => {
-            schema_class => 'Book',
-            dsn => 'dbi:mysql:database=books',
-            user => $ENV{BOOK_USER},
-            pass => $ENV{BOOK_PASS},
-        }
-    }
-};
-
 my @public_paths = qw[/ /login /search];
 my %public_path = map { $_ => 1 } @public_paths;
 
@@ -30,6 +19,7 @@ hook before => sub {
 };
 
 get '/' => sub {
+    set_plugins();
     my $books_rs = schema->resultset('Book');
     
     template 'index', {
@@ -48,6 +38,7 @@ get '/' => sub {
 };
 
 get '/start/:isbn' => sub {
+    set_plugins();
     my $books_rs = schema->resultset('Book');
     my $book = $books_rs->find({ isbn => param('isbn')});
 
@@ -59,6 +50,7 @@ get '/start/:isbn' => sub {
 };
 
 get '/end/:isbn' => sub {
+    set_plugins();
     my $books_rs = schema->resultset('Book');
     my $book = $books_rs->find({ isbn => param('isbn')});
 
@@ -70,6 +62,7 @@ get '/end/:isbn' => sub {
 };
 
 get '/add/:isbn' => sub {
+    set_plugins();
     my $author_rs = schema->resultset('Author');
 
     my $amz = get_amazon();
@@ -147,5 +140,17 @@ sub get_amazon {
     ) or die "Cannot connect to Amazon\n";
 }
 
+sub set_plugins {
+    set plugins => {
+        DBIC => {
+            book => {
+                schema_class => 'Book',
+                dsn => 'dbi:mysql:database=books',
+                user => $ENV{BOOK_USER},
+                pass => $ENV{BOOK_PASS},
+            }
+        }
+    };    
+}
 
 true;
