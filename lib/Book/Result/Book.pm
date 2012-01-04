@@ -116,30 +116,6 @@ __PACKAGE__->belongs_to(
 # Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-09-06 19:50:03
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EEN+CRZ5uZJm4AMOTh9UIw
 
-sub reading {
-  my $self = shift;
-
-  return $self->search({
-    started => { '!=' => undef },
-    ended => undef,
-  });
-}
-
-sub read {
-  my $self = shift;
-
-  return $self->search({
-    ended => { '!=' => undef },
-  });
-}
-
-sub to_read {
-  my $self = shift;
-
-  return $self->search({
-    started => undef,
-  });
-}
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;

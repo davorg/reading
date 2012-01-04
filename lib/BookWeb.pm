@@ -22,9 +22,16 @@ get '/' => sub {
     my $books_rs = schema->resultset('Book');
     
     template 'index', {
-        reading => [ $books_rs->reading ],
-        read    => [ $books_rs->read ],
-        to_read => [ $books_rs->to_read ],
+        reading => [ $books_rs->search({
+            started => { '!=' => undef },
+            ended => undef,
+        }) ],
+        read    => [ $books_rs->search({
+            ended => { '!=' => undef },
+        }) ],
+        to_read => [ $books_rs->search({
+            started => undef,
+        }) ],
         logged  => session 'logged_in',
     };
 };
