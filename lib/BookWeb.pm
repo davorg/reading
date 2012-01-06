@@ -104,6 +104,7 @@ post '/search' => sub {
 
     my %data;
     $data{search} = param('search');
+    $data{logged} = session 'logged_in';
     if ($resp->is_success) {
         $data{books} = [ $resp->properties ];
     } else {
