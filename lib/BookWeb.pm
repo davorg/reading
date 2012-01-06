@@ -119,7 +119,7 @@ get '/login' => sub {
 };
 
 post '/login' => sub {
-    if (params->{user} eq 'reader' && params->{pass} eq 'letmein') {
+    if (params->{user} eq $ENV{BOOK_USER} && params->{pass} eq $ENV{BOOK_PASS}) {
         session 'logged_in' => 1;
     }
 
@@ -147,8 +147,8 @@ sub set_plugins {
             book => {
                 schema_class => 'Book',
                 dsn => 'dbi:mysql:database=books',
-                user => $ENV{BOOK_USER},
-                pass => $ENV{BOOK_PASS},
+                user => $ENV{BOOK_DB_USER},
+                pass => $ENV{BOOK_DB_PASS},
             }
         }
     };    
