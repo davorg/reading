@@ -1,6 +1,7 @@
 package BookWeb;
 use Dancer ':syntax';
 use Dancer::Plugin::DBIC;
+use Dancer::Plugin::Feed;
 use Dancer::Session;
 
 use Net::Amazon;
@@ -8,11 +9,8 @@ use DateTime;
 
 our $VERSION = '0.1';
 
-my @public_paths = qw[/ /login /search];
-my %public_path = map { $_ => 1 } @public_paths;
-
 hook before => sub {
-    if (! session('logged_in') and ! $public_path{request->path_info}) {
+    if (! session('logged_in') and ! public_path(request->path_info)) {
         var requested_path => request->path_info;
         request->path_info('/login');
     }
@@ -94,6 +92,29 @@ get '/add/:isbn' => sub {
     return redirect '/';
 };
 
+get '/feed' => sub {
+    return redirect '/feed/atom';
+};
+
+get '/feed/:format' => sub {
+    set_plugins();
+    my $books_rs = schema->resultset('Book');
+    
+    my @books = ($books_rs->search({
+        started => { '!=' => undef },
+    }));
+    
+    my $feed = create_feed(
+        format => params->{format},
+        title => 'Reading List',
+        link => 'http://books.dave.org.uk/',
+        modified => DateTime->now,
+        entries => [ map { title => $_->title }, @books ],
+    );
+    
+    return $feed;
+};
+
 post '/search' => sub {
     my $amz = get_amazon();
    
@@ -152,6 +173,17 @@ sub set_plugins {
             }
         }
     };    
+}
+
+my @public_paths = qw[/ /login /search];
+my %public_path = map { $_ => 1 } @public_paths;
+
+sub public_path {
+    my $path = shift;
+    
+    return 1 if $public_path{$path};
+    return 1 if $path =~ m|^/feed|;
+    return;
 }
 
 true;
